@@ -1,0 +1,186 @@
+<% layout("layouts/boilerplate.ejs") %>
+
+  <!-- <h3 class="mb-3">All Listings</h3> -->
+  <style>
+    #filters  {
+      display: flex;
+      gap: 24px;
+      padding: 10px 0;
+      justify-content: center;
+      align-items: center;
+      /* desktop alignment */
+    }
+
+    /* Filter item */
+    .filter{
+      text-align: center;
+      margin-top: 1.5rem;
+      opacity: 0.7;
+      min-width: 90px;
+      flex-shrink: 0;
+    }
+
+    .filter:hover {
+      opacity: 1;
+      cursor: pointer;
+    }
+
+    /* 🖥️ DESKTOP ONLY (≥ 992px) */
+    @media (min-width: 992px) {
+      #filters {
+        flex-wrap: wrap;
+        /* normal layout */
+        overflow-x: visible;
+      }
+    }
+
+    /* 📱 TABLET + MOBILE (< 992px) → SLIDER */
+    @media (max-width: 991px) {
+      #filters {
+        flex-wrap: nowrap;
+        /* single row */
+        overflow-x: auto;
+        justify-content: flex-start;
+        scroll-behavior: smooth;
+      }
+
+      #filters::-webkit-scrollbar {
+        display: none;
+      }
+
+      #filters {
+        scrollbar-width: none;
+        /* Firefox */
+        -ms-overflow-style: none;
+        /* IE */
+      }
+    }
+
+    .tax-info{
+      display: none;
+    }
+  .tax-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border: 1px solid #dcdcdc;
+  border-radius: 999px; /* pill shape */
+  background-color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+  </style>
+  <div id="filters">
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-fire"></i>
+      </div>
+      <p>Trending</p>
+    </div>
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-bed"></i>
+      </div>
+      <p>Rooms</p>
+    </div>
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-city"></i>
+      </div>
+      <p>Iconic Cities</p>
+    </div>
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-mountain"></i>
+      </div>
+      <p>Mountains</p>
+    </div>
+    <div class="filter">
+      <div>
+        <i class="fa-brands fa-fort-awesome"></i>
+      </div>
+      <p>Castles</p>
+    </div>
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-person-swimming"></i>
+      </div>
+      <p>Amazing Pools</p>
+    </div>
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-campground"></i>
+      </div>
+      <p>Camping</p>
+    </div>
+    <div class="filter">
+      <div>
+        <i class="fa-solid fa-cow"></i>
+      </div>
+      <p>Farms</p>
+    </div>
+    <div class="filter">
+      <div>
+        <i class="fa-regular fa-snowflake"></i>
+      </div>
+      <p>Arctic</p>
+    </div>
+    <div class="tax-toggle">
+      <div class="form-check form-check-reverse form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+        <label class="form-check-label" for="switchCheckDefault" >Display total after taxes</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3 g-4">
+  <% for (let listing of allListings) { %>
+
+    <!-- Mobile: 1 | Tablet: 2 | Desktop: 3 -->
+    <div class="col-12 col-sm-6 col-lg-4 mb-4">
+
+      <div class="card h-100">
+        <img
+          src="<%= listing.image.url %>"
+          class="card-img-top"
+          style="height:20rem"
+          alt="listing image"
+        >
+
+        <div class="card-body mt-3">
+          <h5>
+            <%= listing.title %>
+          </h5>
+
+          <p>
+            <%= listing.description %><br>
+            ₹<%= listing.price.toLocaleString("en-IN") %>/night
+            <i class="tax-info">&nbsp; +18% GST</i>
+          </p>
+
+          <a href="/listings/<%= listing._id %>" class="btn btn-primary">
+            View
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  <% } %>
+</div>
+
+
+  <script>
+    let taxSwitch = document.getElementById("switchCheckDefault");
+    taxSwitch.addEventListener("click",()=>{
+      let taxInfo = document.getElementsByClassName("tax-info");
+      for(info of taxInfo){
+        if(info.style.display != "inline"){
+          info.style.display = "inline"
+        } else {
+          info.style.display = "none"
+        }
+      }
+    })
+  </script>

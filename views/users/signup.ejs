@@ -1,0 +1,40 @@
+<% layout("layouts/boilerplate.ejs") %>
+
+    <div class="container d-flex justify-content-center align-items-center" style="min-height:85vh;">
+        <div class="row shadow-lg rounded-4 overflow-hidden w-75 signup-card">
+
+            <div class="col-md-6 text-white p-5 custom-bg">
+                <h2 class="fw-bold">Welcome to Wanderlust</h2>
+                <p>Create your account and start exploring.</p>
+            </div>
+
+            <div class="col-md-6 p-5 bg-white">
+                <h3 class="text-center mb-3">Sign Up</h3>
+
+                <form action="/signup" method="POST" class="needs-validation" novalidate>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fa fa-user"></i></span>
+                        <input name="username" class="form-control" placeholder="Username" required>
+                    </div>
+
+                    <div class="input-group mb-3 ">
+                        <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                        <input name="email" class="form-control" placeholder="Email" required>
+                    </div>
+
+                    <div class="input-group mb-4 ">
+                        <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                        <input name="password" type="password" class="form-control" placeholder="Password" required>
+                    </div>
+
+                    <button class="btn custom-btn w-100">Sign Up</button>
+                    <!-- ✅ LOGIN OPTION -->
+                    <p class="text-center mt-3">
+                        Already have an account?
+                        <a href="/login" class="fw-semibold text-decoration-none">Login</a>
+                    </p>
+                </form>
+            </div>
+
+        </div>
+    </div>

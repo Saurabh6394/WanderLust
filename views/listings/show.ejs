@@ -1,0 +1,182 @@
+<% layout("layouts/boilerplate.ejs") %>
+
+  <div class="row mt-3">
+
+    <!-- Listing Title -->
+    <div class="col-8 offset-3">
+      <h3>
+        <%= listing.title %>
+      </h3>
+    </div>
+
+    <!-- Listing Card -->
+    <div class="card col-6 offset-3">
+      <img src="<%= listing.image.url %>" class="card-img-top show-img mb-2" alt="listing_image">
+
+      <div class="card-body">
+        <p class="card-title">
+          <b>
+            <%= listing.owner.username %>
+          </b><br>
+          <%= listing.description %><br>
+            &#8377;<%= listing.price.toLocaleString("en-IN") %> / per night <br>
+              <%= listing.location %><br>
+                <%= listing.country %>
+        </p>
+      </div>
+    </div>
+
+    <!-- EDIT / DELETE LISTING (ONLY OWNER) -->
+    <% if (currentUser && currentUser._id.equals(listing.owner._id)) { %>
+      <div class="btns mb-3">
+        <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark offset-3 col-1">Edit</a>
+
+        <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+          <button type="submit" class="btn btn-dark offset-5">Delete</button>
+        </form>
+      </div>
+      <% } %>
+
+        <hr>
+
+        <div class="col-8 offset-3">
+
+          <!-- CREATE REVIEW (ANY LOGGED-IN USER) -->
+          <% if (currentUser) { %>
+            <h4>Leave a Review</h4>
+
+            <form action="/listings/<%= listing._id %>/reviews" method="POST" class="mb-3 needs-validation" novalidate>
+
+              <div class="mb-3">
+                <label class="form-label d-block">Rating</label>
+                <div class="star-rating">
+                  <% for (let i=5; i>= 1; i--) { %>
+                    <input type="radio" name="review[rating]" id="star<%= i %>" value="<%= i %>" required>
+                    <label for="star<%= i %>">★</label>
+                    <% } %>
+                </div>
+                <div class="invalid-feedback">Please select a rating.</div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Comments</label>
+                <textarea name="review[comment]" class="form-control" rows="4" required></textarea>
+                <div class="invalid-feedback">Please add a comment.</div>
+              </div>
+
+              <button class="btn btn-outline-dark">Submit</button>
+            </form>
+
+            <% } else { %>
+              <p class="text-muted">Login to leave a review.</p>
+              <% } %>
+
+                <!-- ALL REVIEWS -->
+                <h4 class="mt-4">All Reviews</h4>
+
+                <div class="row">
+                  <% if (listing.reviews.length===0) { %>
+                    <p class="text-muted">No reviews yet.</p>
+                    <% } %>
+
+                      <% for (let review of listing.reviews) { %>
+                        <div class="col-md-6 mb-3">
+                          <div class="card shadow-sm">
+                            <div class="card-body p-2">
+
+                              <!-- Reviewer Name -->
+                              <h6 class="fw-bold mb-1">
+                                <i class="fa-solid fa-user"></i>
+                                <%= review.author.username %>
+                              </h6>
+
+                              <!-- Stars -->
+                              <div class="mb-2">
+                                <% for (let i=1; i <=5; i++) { %>
+                                  <span class="<%= i <= review.rating ? 'text-warning' : 'text-muted' %>">★</span>
+                                  <% } %>
+                              </div>
+
+                              <!-- Comment -->
+                              <p class="card-text">
+                                <%= review.comment %>
+                              </p>
+
+                              <!-- DELETE REVIEW (ONLY LISTING OWNER) -->
+                              <% if (currentUser && currentUser._id.equals(listing.owner._id)) { %>
+                                <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                  method="POST">
+                                  <button class="btn btn-sm btn-dark">Delete</button>
+                                </form>
+                                <% } %>
+
+                            </div>
+                          </div>
+                        </div>
+                        <% } %>
+                </div>
+                <hr>
+                <h4 class="mt-4">Location</h4>
+
+                <div id="map" style="height: 350px; width: 100%; border-radius: 12px;"></div>
+
+                <!-- Pass data safely -->
+                <script>
+                  const listingLocation = "<%= listing.location %>, <%= listing.country %>";
+                  const listingTitle = "<%= listing.title %>";
+                </script>
+
+                <script>
+                  // 1️⃣ Initialize map with fallback (India center)
+                  const map = L.map("map", {
+                    scrollWheelZoom: false
+                  }).setView([20.5937, 78.9629], 5);
+
+                  // 2️⃣ Satellite tiles (FREE)
+                  L.tileLayer(
+                    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                    {
+                      maxZoom: 19,
+                      attribution: '&copy; OpenStreetMap contributors'
+                    }
+                  ).addTo(map);
+
+
+                  // 3️⃣ Geocode address
+                  fetch(
+                    `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(listingLocation)}`
+                  )
+                    .then(res => res.json())
+                    .then(data => {
+                      if (!data || data.length === 0) return;
+
+                      const lat = parseFloat(data[0].lat);
+                      const lon = parseFloat(data[0].lon);
+
+                      // 4️⃣ Center map
+                      map.setView([lat, lon], 12);
+
+                      // 5️⃣ Marker
+                      const marker = L.marker([lat, lon]).addTo(map);
+
+                      // 6️⃣ Popup (Airbnb-style)
+                      marker.bindPopup(`
+        <div style="font-weight:600; font-size:14px;">
+          ${listingTitle}
+        </div>
+        <div style="font-size:13px; color:#555;">
+          Exact location will be provided after booking
+        </div>
+      `).openPopup();
+
+                      // 7️⃣ Fix size issues
+                      setTimeout(() => {
+                        map.invalidateSize();
+                      }, 200);
+                    })
+                    .catch(err => console.error("Map error:", err));
+                </script>
+
+
+        </div>
+  </div>

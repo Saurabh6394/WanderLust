@@ -1,0 +1,705 @@
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+
+.container{
+    flex: 1;
+}
+
+.navbar {
+    height: 5rem;
+    background: white;
+}
+
+.fa-compass {
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.nav-link {
+    color: #222222 !important;
+}
+
+.f-info-links a {
+    text-decoration: none !important;
+}
+
+.f-info-links:hover a {
+    text-decoration: underline;
+}
+
+.f-info-links,
+.f-info-social,
+.f-info-brand {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-social i {
+    margin-right: 1rem;
+}
+
+.f-info {
+    text-align: center;
+    height: 8rem;
+    background: #ebebeb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+}
+
+/* cards */
+
+.card {
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top {
+    border-radius: 0.5rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.card-body {
+    padding: 0 !important;
+
+}
+
+.card-text {
+    font-weight: 400 !important;
+}
+
+.listing-link {
+    text-decoration: none !important;
+    color: black !important;
+}
+
+
+.card-img-top {
+    transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.card-img-top:hover {
+    transform: scale(1.05);
+    filter: brightness(95%) blur(1px);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.25),
+        0 8px 18px rgba(13, 110, 253, 0.35);
+}
+
+
+/* NEW page button */
+
+.add-btn{
+    background:#fe424d !important;
+    border: none !important;
+}
+
+
+/* Edit  */
+
+.edit-link{
+    display: inline-block;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    text-decoration: none !important;
+    color: #fe424d !important;
+}
+
+
+.edit-list{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+.btns{
+    display: flex;
+    gap: 1rem;
+}
+
+.show-img{
+    height: 18rem !important;
+    object-fit: cover !important;
+}
+.star-rating {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    font-size: 3.2rem;
+    gap: 14px;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #ffc107; /* Bootstrap warning color */
+}
+
+.star-rating.is-invalid + .invalid-feedback {
+    display: block;
+}
+
+.star-rating.is-invalid label {
+    color: #dc3545; /* Bootstrap danger */
+}
+
+/* Custom Red Theme */
+.custom-bg {
+    background-color: #ff4d4f;
+}
+
+.custom-btn {
+    background-color: #ff4d4f !important;
+    border: none;
+    color: #fff;
+}
+
+.custom-btn:hover {
+    background-color: #e63e40;
+}
+
+.preview-img {
+  width: 180px;
+  height: auto;
+  object-fit: cover;
+}
+
+
+/* ===== Signup Animation ===== */
+
+/* Initial hidden state */
+.slide-left,
+.slide-right {
+    opacity: 0;
+    animation-duration: 0.9s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+}
+
+/* Left panel animation */
+.slide-left {
+    animation-name: slideFromLeft;
+}
+
+/* Right panel animation */
+.slide-right {
+    animation-name: slideFromRight;
+    animation-delay: 0.2s;
+}
+
+/* Keyframes */
+@keyframes slideFromLeft {
+    from {
+        transform: translateX(-60px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideFromRight {
+    from {
+        transform: translateX(60px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+
+/* =========================
+   CARD ENTRY
+========================= */
+.signup-card {
+    animation: cardZoom 0.8s ease forwards;
+    opacity: 0;
+}
+
+@keyframes cardZoom {
+    from {
+        transform: scale(0.92);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* =========================
+   LEFT & RIGHT SECTIONS
+========================= */
+.left-animate,
+.right-animate {
+    opacity: 0;
+    filter: blur(8px);
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.left-animate {
+    animation-name: slideLeftPro;
+}
+
+.right-animate {
+    animation-name: slideRightPro;
+    animation-delay: 0.15s;
+}
+
+/* Keyframes */
+@keyframes slideLeftPro {
+    from {
+        transform: translateX(-120px);
+        opacity: 0;
+        filter: blur(8px);
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+@keyframes slideRightPro {
+    from {
+        transform: translateX(120px);
+        opacity: 0;
+        filter: blur(8px);
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+/* =========================
+   INPUT STAGGER ANIMATION
+========================= */
+.animate-field {
+    opacity: 0;
+    transform: translateY(25px);
+    animation: fieldFade 0.6s ease forwards;
+}
+
+.animate-field:nth-child(1) { animation-delay: 0.4s; }
+.animate-field:nth-child(2) { animation-delay: 0.55s; }
+.animate-field:nth-child(3) { animation-delay: 0.7s; }
+
+@keyframes fieldFade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================
+   BUTTON ANIMATION
+========================= */
+.animate-btn {
+    animation: btnFadeUp 0.7s ease forwards;
+    animation-delay: 0.9s;
+    opacity: 0;
+}
+
+@keyframes btnFadeUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* =========================
+   BUTTON HOVER EFFECT
+========================= */
+.custom-btn {
+    background-color: #ff4d4f;
+    border: none;
+    color: #fff;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.custom-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 25px rgba(255, 77, 79, 0.45);
+}
+
+
+/* FOOTER SECTION SOCIAL LOGO */
+
+.f-info-social i {
+    font-size: 1.4rem;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.f-info-social i:hover {
+    color: #ff4d4f;
+    transform: scale(1.15);
+}
+
+
+/* SIDEBAR CSS */
+
+.offcanvas {
+  width: 260px;
+}
+
+.offcanvas-body .nav-link {
+  font-size: 1.1rem;
+  padding: 10px 0;
+}
+
+.offcanvas-body .nav-link:hover {
+  color: #ff4d4f;
+}
+
+
+.offcanvas-backdrop {
+  background-color: rgba(0,0,0,0.15);
+}
+
+
+.form-container {
+  transition: transform 0.3s ease;
+}
+
+/* When sidebar opens */
+.offcanvas.show ~ #page-content .form-container {
+  transform: translateX(30px);
+}
+
+/* Sidebar width */
+.offcanvas {
+  width: 260px;
+  
+}
+
+/* Main page transition */
+#page-content {
+  transition: transform 0.35s ease;
+}
+
+
+/* Disable push on desktop */
+@media (min-width: 768px) {
+  .offcanvas.show ~ #page-content {
+    transform: none;
+    
+  }
+}
+
+/* Transition only the main content */
+.main-shift {
+  transition: transform 0.35s ease;
+}
+
+/* When sidebar opens → move ONLY main content */
+.offcanvas.show ~ main #page-content .main-shift,
+.offcanvas.show ~ #page-content .main-shift {
+  transform: translateX(260px);
+}
+
+/* Desktop safety */
+@media (min-width: 768px) {
+  .offcanvas.show ~ #page-content .main-shift {
+    transform: none;
+  }
+}
+
+
+/* ==============================
+   CUSTOM COMPACT SIDEBAR
+============================== */
+
+/* Width */
+.custom-sidebar {
+  width: 260px;
+
+  /* 🔑 Remove full height */
+  height: auto !important;
+  min-height: unset !important;
+  max-height: calc(100vh - 80px);
+  margin-top: 80px;
+
+  /* Position below navbar */
+  top: 70px;
+  bottom: auto;
+
+  /* Box shadow */
+  box-shadow: 6px 0 18px rgba(0, 0, 0, 0.15);
+
+  /* Rounded edges */
+  border-radius: 0 12px 12px 0;
+}
+
+/* Remove Bootstrap overlay */
+.offcanvas-backdrop {
+  display: none !important;
+}
+
+/* Sidebar body spacing */
+.custom-sidebar .offcanvas-body {
+  padding: 1.2rem;
+}
+
+/* ==============================
+   MOVE ONLY PAGE CONTENT
+============================== */
+.main-shift {
+  transition: transform 0.35s ease;
+}
+
+/* Push form / listings */
+.offcanvas.show ~ #page-content .main-shift {
+  transform: translateX(260px);
+}
+
+/* Desktop safety */
+@media (min-width: 768px) {
+  .custom-sidebar {
+    display: none !important;
+  }
+
+  .offcanvas.show ~ #page-content .main-shift {
+    transform: none;
+  }
+}
+
+
+
+/* Sidebar */
+.custom-sidebar {
+  width: 220px !important;          /* 👈 reduced width */
+  max-width: 75vw;
+  height: auto !important;
+  top: 70px;
+  box-shadow: 6px 0 18px rgba(0,0,0,0.15);
+  border-radius: 0 12px 12px 0;
+}
+
+/* Remove overlay */
+.offcanvas-backdrop {
+  display: none !important;
+}
+
+/* Theme */
+.custom-bg {
+  background-color: #ff4d4f;
+}
+
+.custom-btn {
+  background-color: #ff4d4f;
+  border: none;
+  color: #fff;
+}
+
+
+@media (max-width: 400px) {
+  .custom-sidebar {
+    width: 170px;
+  }
+}
+
+
+/* Move ONLY signup / login card when sidebar opens */
+.offcanvas.show ~ main .signup-card {
+  margin-left: 200px;
+  transition: margin-left 0.3s ease;
+}
+
+/* Same for login card if different class */
+.offcanvas.show ~ main .login-card {
+  margin-left: 200px;
+  transition: margin-left 0.3s ease;
+}
+
+/* Mobile responsiveness for listings */
+@media (max-width: 576px) {
+  .card-img-top {
+    height: 10rem !important; /* Smaller image height on mobile */
+  }
+
+  .card {
+    width: 100% !important; /* Ensure full width */
+    margin-bottom: 1rem !important; /* Adjust spacing */
+  }
+
+  .card-body h5 {
+    font-size: 1.1rem !important; /* Smaller title */
+  }
+
+  .card-body p {
+    font-size: 0.9rem !important; /* Smaller description */
+  }
+
+  .btn {
+    font-size: 0.8rem !important; /* Smaller button text */
+    padding: 0.4rem 0.8rem !important; /* Smaller button padding */
+  }
+}
+
+/* Tablet responsiveness for listings */
+@media (min-width: 577px) and (max-width: 768px) {
+  .card-img-top {
+    height: 15rem !important; /* Medium image height on tablet */
+  }
+
+  .card-body h5 {
+    font-size: 1.2rem !important; /* Medium title */
+  }
+
+  .card-body p {
+    font-size: 1rem !important; /* Medium description */
+  }
+
+  .btn {
+    font-size: 0.9rem !important; /* Medium button text */
+    padding: 0.5rem 1rem !important; /* Medium button padding */
+  }
+}
+
+/* Desktop responsiveness for listings */
+@media (min-width: 769px) {
+  .card-img-top {
+    height: 20rem !important; /* Default image height on desktop */
+  }
+
+  .card-body h5 {
+    font-size: 1.25rem !important; /* Default title */
+  }
+
+  .card-body p {
+    font-size: 1rem !important; /* Default description */
+  }
+
+  .btn {
+    font-size: 1rem !important; /* Default button text */
+    padding: 0.5rem 1rem !important; /* Default button padding */
+  }
+}
+
+
+/* ============================= */
+/* Navbar Search (Clean Final)  */
+/* ============================= */
+
+.navbar-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Search Input */
+.navbar-search input {
+  width: 260px;
+  height: 44px;
+  padding: 0 16px 0 42px;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+/* Search Icon */
+.navbar-search .search-icon {
+  position: absolute;
+  left: 16px;
+  font-size: 0.9rem;
+  color: #717171;
+}
+
+/* Search Button */
+.navbar-search .search-btn {
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: none;
+  background-color: #ff385c; /* Airbnb red */
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* Hover */
+.navbar-search .search-btn:hover {
+  background-color: #e31c5f;
+}
+
+/* Focus */
+.navbar-search input:focus {
+  border-color: #ff385c;
+  box-shadow: 0 0 0 3px rgba(255, 56, 92, 0.15);
+}
+
+/* 📱 Tablet & below → Smaller search */
+@media (max-width: 991px) {
+  .navbar-search input {
+    width: 180px;
+  }
+
+  .navbar-search .search-btn {
+    padding: 0 12px;
+    font-size: 0.85rem;
+  }
+}
+
+/* 📱 Small mobile → Hide search */
+/* 📱 Mobile → Show search but make it compact */
+@media (max-width: 575px) {
+  .navbar-search {
+    display: flex;
+  }
+
+  .navbar-search input {
+    width: 160px;
+    height: 38px;
+    font-size: 0.85rem;
+  }
+
+  .navbar-search .search-btn {
+    height: 38px;
+    padding: 0 10px;
+    font-size: 0.75rem;
+  }
+}
+
+
+

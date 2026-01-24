@@ -1,0 +1,84 @@
+<nav class="navbar navbar-expand bg-body-light border-bottom sticky-top mb-2">
+  <div class="container-fluid ">
+
+    <!-- Brand -->
+    <a class="navbar-brand" href="/listings">
+      <i class="fa-regular fa-compass"></i>
+    </a>
+
+    <!-- Toggle Button (ONLY extra-small screens) -->
+    <button class="navbar-toggler d-inline-flex d-sm-none ms-auto" type="button" data-bs-toggle="offcanvas"
+      data-bs-target="#mobileSidebar" aria-controls="mobileSidebar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <!-- ===================== -->
+    <!-- NAVBAR CONTENT (TABLET + DESKTOP) -->
+    <!-- ===================== -->
+    <div class=" d-flex w-100 align-items-center">
+
+      <!-- Left Section -->
+      <div class="navbar-nav me-auto d-flex align-items-center gap-3">
+        <a class="nav-link" href="/listings">Explores</a>
+
+        <!-- 🔍 SEARCH BAR -->
+        <form class="navbar-search" action="/listings" method="GET">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+
+          <input type="search" name="search" placeholder="Search destinations" value="<%= query.search || '' %>">
+
+          <button type="submit" class="search-btn">
+            Search
+          </button>
+        </form>
+      </div>
+
+      <!-- Right Section -->
+      <div class="navbar-nav ms-auto d-none d-sm-flex align-items-center gap-2">
+        <a class="nav-link" href="/listings/new">Airbnb your home</a>
+
+        <% if (!currentUser) { %>
+          <a class="nav-link fw-semibold" href="/signup">Signup</a>
+          <a class="nav-link fw-semibold" href="/login">Login</a>
+          <% } else { %>
+            <span class="nav-link fw-semibold">
+              Hi, <%= currentUser.username %>
+            </span>
+            <a class="nav-link text-danger fw-semibold" href="/logout">Logout</a>
+            <% } %>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== -->
+<!-- MOBILE SIDEBAR -->
+<!-- ===================== -->
+<div class="offcanvas offcanvas-start custom-sidebar" tabindex="-1" id="mobileSidebar" data-bs-backdrop="false"
+  data-bs-scroll="true">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">WanderLust</h5>
+    <button class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+
+  <div class="offcanvas-body">
+    <nav class="nav flex-column">
+      <a class="nav-link" href="/listings">Airbnb your home</a>
+      <a class="nav-link" href="/listings/new">Add New Listing</a>
+
+      <hr>
+
+      <% if (!currentUser) { %>
+        <a class="nav-link" href="/signup">Signup</a>
+        <a class="nav-link" href="/login">Login</a>
+        <% } else { %>
+          <span class="nav-link fw-semibold">
+            Hi, <%= currentUser.username %>
+          </span>
+          <a class="nav-link text-danger fw-semibold" href="/logout">Logout</a>
+          <% } %>
+    </nav>
+  </div>
+</div>
+

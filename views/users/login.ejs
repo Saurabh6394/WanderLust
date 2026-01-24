@@ -1,0 +1,55 @@
+<% layout("layouts/boilerplate.ejs") %>
+
+  <div class="container d-flex justify-content-center align-items-center" style="min-height:85vh;">
+    <div class="row shadow-lg rounded-4 overflow-hidden w-75 login-card signup-card">
+
+      <!-- LEFT SECTION (Same as Signup) -->
+      <div class="col-md-6 text-white p-5 d-flex flex-column justify-content-center custom-bg left-animate">
+        <h2 class="fw-bold mb-3">Welcome Back to Wanderlust</h2>
+        <p class="mb-4">
+          Login to continue exploring beautiful destinations with us.
+        </p>
+
+        <ul class="list-unstyled">
+          <li class="mb-2">✔ Access your saved trips</li>
+          <li class="mb-2">✔ Manage your listings</li>
+          <li class="mb-2">✔ Secure & fast login</li>
+        </ul>
+      </div>
+
+      <!-- RIGHT SECTION (Login Form) -->
+      <div class="col-md-6 p-5 bg-white right-animate form-container">
+        <h2 class="fw-bold text-center mb-2">Login</h2>
+        <p class="text-muted text-center mb-4">
+          Enter your credentials to continue
+        </p>
+
+        <form action="/login" method="POST" class="needs-validation" novalidate>
+
+          <!-- Username -->
+          <div class="input-group mb-3 animate-field">
+            <span class="input-group-text"><i class="fa fa-user"></i></span>
+            <input name="username" class="form-control" placeholder="Username" type="text" required>
+          </div>
+
+          <!-- Password -->
+          <div class="input-group mb-4 animate-field">
+            <span class="input-group-text">
+              <i class="fa fa-lock"></i>
+            </span>
+            <input name="password" type="password" class="form-control" placeholder="Password" required>
+          </div>
+
+          <button class="btn custom-btn w-100 py-2 fw-semibold animate-btn">
+            Login
+          </button>
+        </form>
+
+        <p class="text-center mt-3">
+          Don't have an account?
+          <a href="/signup">Sign up</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
