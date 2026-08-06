@@ -1,186 +1,472 @@
 <% layout("layouts/boilerplate.ejs") %>
 
-  <!-- <h3 class="mb-3">All Listings</h3> -->
-  <style>
-    #filters  {
-      display: flex;
-      gap: 24px;
-      padding: 10px 0;
+<style>
+  /* =====================================================
+     FILTERS
+  ===================================================== */
+
+  #filters {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+    padding: 10px 5px;
+  }
+
+  .filter {
+    text-align: center;
+    opacity: 0.7;
+    min-width: 90px;
+    flex-shrink: 0;
+    padding-top: 12px;
+    transition: opacity 0.2s ease;
+  }
+
+  .filter:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+
+  .filter i {
+    font-size: 1.1rem;
+    margin-bottom: 7px;
+  }
+
+  .filter p {
+    margin: 0;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
+
+  /* =====================================================
+     TAX TOGGLE
+  ===================================================== */
+
+  .tax-info {
+    display: none;
+  }
+
+  .tax-toggle {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+
+    padding: 10px 16px;
+
+    border: 1px solid #dcdcdc;
+    border-radius: 999px;
+
+    background-color: #ffffff;
+
+    font-size: 0.9rem;
+    font-weight: 500;
+
+    white-space: nowrap;
+  }
+
+
+  /* =====================================================
+     LISTING CARDS
+  ===================================================== */
+
+  .listing-card {
+    border: none;
+    height: 100%;
+    background: transparent;
+  }
+
+  /*
+    Responsive image container.
+
+    Instead of forcing every image to height:20rem,
+    aspect-ratio keeps images proportional on
+    mobile, tablet and desktop.
+  */
+
+  .listing-image-container {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+
+    overflow: hidden;
+
+    border-radius: 14px;
+
+    background-color: #f2f2f2;
+  }
+
+  .listing-image {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition: transform 0.25s ease;
+  }
+
+  .listing-card:hover .listing-image {
+    transform: scale(1.02);
+  }
+
+
+  /* =====================================================
+     CARD CONTENT
+  ===================================================== */
+
+  .listing-card .card-body {
+    padding: 14px 4px 5px;
+  }
+
+  .listing-card .card-title {
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .listing-description {
+    margin-bottom: 12px;
+
+    color: #555;
+
+    line-height: 1.5;
+  }
+
+  .listing-price {
+    color: #222;
+    font-weight: 600;
+  }
+
+
+  /* =====================================================
+     DESKTOP
+     992px and above
+  ===================================================== */
+
+  @media (min-width: 992px) {
+
+    #filters {
       justify-content: center;
-      align-items: center;
-      /* desktop alignment */
+      flex-wrap: wrap;
+      overflow-x: visible;
     }
 
-    /* Filter item */
-    .filter{
-      text-align: center;
-      margin-top: 1.5rem;
-      opacity: 0.7;
-      min-width: 90px;
-      flex-shrink: 0;
+  }
+
+
+  /* =====================================================
+     TABLET + MOBILE
+     Below 992px
+  ===================================================== */
+
+  @media (max-width: 991.98px) {
+
+    #filters {
+      flex-wrap: nowrap;
+
+      overflow-x: auto;
+      overflow-y: hidden;
+
+      justify-content: flex-start;
+
+      scroll-behavior: smooth;
+
+      -webkit-overflow-scrolling: touch;
     }
 
-    .filter:hover {
-      opacity: 1;
-      cursor: pointer;
-    }
-
-    /* 🖥️ DESKTOP ONLY (≥ 992px) */
-    @media (min-width: 992px) {
-      #filters {
-        flex-wrap: wrap;
-        /* normal layout */
-        overflow-x: visible;
-      }
-    }
-
-    /* 📱 TABLET + MOBILE (< 992px) → SLIDER */
-    @media (max-width: 991px) {
-      #filters {
-        flex-wrap: nowrap;
-        /* single row */
-        overflow-x: auto;
-        justify-content: flex-start;
-        scroll-behavior: smooth;
-      }
-
-      #filters::-webkit-scrollbar {
-        display: none;
-      }
-
-      #filters {
-        scrollbar-width: none;
-        /* Firefox */
-        -ms-overflow-style: none;
-        /* IE */
-      }
-    }
-
-    .tax-info{
+    /* Hide scrollbar - Chrome/Safari */
+    #filters::-webkit-scrollbar {
       display: none;
     }
-  .tax-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 16px;
-  border: 1px solid #dcdcdc;
-  border-radius: 999px; /* pill shape */
-  background-color: #ffffff;
-  font-size: 0.95rem;
-  font-weight: 500;
-}
-  </style>
-  <div id="filters">
-    <div class="filter">
-      <div>
-        <i class="fa-solid fa-fire"></i>
-      </div>
-      <p>Trending</p>
+
+    /* Hide scrollbar - Firefox */
+    #filters {
+      scrollbar-width: none;
+    }
+
+  }
+
+
+  /* =====================================================
+     MOBILE
+     Below 576px
+  ===================================================== */
+
+  @media (max-width: 575.98px) {
+
+    #filters {
+      gap: 8px;
+      padding: 8px 4px 12px;
+    }
+
+    .filter {
+      min-width: 82px;
+      padding-top: 8px;
+    }
+
+    .filter i {
+      font-size: 1rem;
+    }
+
+    .filter p {
+      font-size: 0.82rem;
+    }
+
+    .tax-toggle {
+      padding: 8px 12px;
+      font-size: 0.8rem;
+    }
+
+    .listing-image-container {
+      border-radius: 12px;
+    }
+
+    .listing-card .card-body {
+      padding: 12px 2px 4px;
+    }
+
+    .listing-card .card-title {
+      font-size: 1.15rem;
+    }
+
+    .listing-description {
+      font-size: 0.95rem;
+    }
+
+  }
+
+</style>
+
+
+<!-- =====================================================
+     FILTER SECTION
+===================================================== -->
+
+<div id="filters">
+
+  <!-- Trending -->
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-fire"></i>
     </div>
-    <div class="filter">
-      <div>
-        <i class="fa-solid fa-bed"></i>
-      </div>
-      <p>Rooms</p>
-    </div>
-    <div class="filter">
-      <div>
-        <i class="fa-solid fa-city"></i>
-      </div>
-      <p>Iconic Cities</p>
-    </div>
-    <div class="filter">
-      <div>
-        <i class="fa-solid fa-mountain"></i>
-      </div>
-      <p>Mountains</p>
-    </div>
-    <div class="filter">
-      <div>
-        <i class="fa-brands fa-fort-awesome"></i>
-      </div>
-      <p>Castles</p>
-    </div>
-    <div class="filter">
-      <div>
-        <i class="fa-solid fa-person-swimming"></i>
-      </div>
-      <p>Amazing Pools</p>
-    </div>
-    <div class="filter">
-      <div>
-        <i class="fa-solid fa-campground"></i>
-      </div>
-      <p>Camping</p>
-    </div>
-    <div class="filter">
-      <div>
-        <i class="fa-solid fa-cow"></i>
-      </div>
-      <p>Farms</p>
-    </div>
-    <div class="filter">
-      <div>
-        <i class="fa-regular fa-snowflake"></i>
-      </div>
-      <p>Arctic</p>
-    </div>
-    <div class="tax-toggle">
-      <div class="form-check form-check-reverse form-switch">
-        <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
-        <label class="form-check-label" for="switchCheckDefault" >Display total after taxes</label>
-      </div>
-    </div>
+    <p>Trending</p>
   </div>
 
-  <div class="row mt-3 g-4">
+
+  <!-- Rooms -->
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-bed"></i>
+    </div>
+    <p>Rooms</p>
+  </div>
+
+
+  <!-- Iconic Cities -->
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-city"></i>
+    </div>
+    <p>Iconic Cities</p>
+  </div>
+
+
+  <!-- Mountains -->
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-mountain"></i>
+    </div>
+    <p>Mountains</p>
+  </div>
+
+
+  <!-- Castles -->
+  <div class="filter">
+    <div>
+      <i class="fa-brands fa-fort-awesome"></i>
+    </div>
+    <p>Castles</p>
+  </div>
+
+
+  <!-- Pools -->
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-person-swimming"></i>
+    </div>
+    <p>Amazing Pools</p>
+  </div>
+
+
+  <!-- Camping -->
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-campground"></i>
+    </div>
+    <p>Camping</p>
+  </div>
+
+
+  <!-- Farms -->
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-cow"></i>
+    </div>
+    <p>Farms</p>
+  </div>
+
+
+  <!-- Arctic -->
+  <div class="filter">
+    <div>
+      <i class="fa-regular fa-snowflake"></i>
+    </div>
+    <p>Arctic</p>
+  </div>
+
+
+  <!-- Tax Toggle -->
+
+  <div class="tax-toggle">
+
+    <div class="form-check form-check-reverse form-switch">
+
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="switchCheckDefault"
+      >
+
+      <label
+        class="form-check-label"
+        for="switchCheckDefault"
+      >
+        Display total after taxes
+      </label>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     LISTINGS
+===================================================== -->
+
+<div class="row mt-3 g-4">
+
   <% for (let listing of allListings) { %>
 
-    <!-- Mobile: 1 | Tablet: 2 | Desktop: 3 -->
-    <div class="col-12 col-sm-6 col-lg-4 mb-4">
+    <!--
+      Mobile  : 1 listing per row
+      Tablet  : 2 listings per row
+      Desktop : 3 listings per row
+    -->
 
-      <div class="card h-100">
-        <img
-          src="<%= listing.image.url %>"
-          class="card-img-top"
-          style="height:20rem"
-          alt="listing image"
-        >
+    <div class="col-12 col-sm-6 col-lg-4 mb-3">
 
-        <div class="card-body mt-3">
-          <h5>
+      <div class="card listing-card">
+
+        <!-- ==========================
+             LISTING IMAGE
+        =========================== -->
+
+        <div class="listing-image-container">
+
+          <img
+            src="<%= listing.image.url %>"
+            class="listing-image"
+            alt="<%= listing.title %>"
+            loading="lazy"
+          >
+
+        </div>
+
+
+        <!-- ==========================
+             LISTING INFORMATION
+        =========================== -->
+
+        <div class="card-body">
+
+          <h5 class="card-title">
             <%= listing.title %>
           </h5>
 
-          <p>
-            <%= listing.description %><br>
-            ₹<%= listing.price.toLocaleString("en-IN") %>/night
-            <i class="tax-info">&nbsp; +18% GST</i>
+
+          <p class="listing-description">
+
+            <%= listing.description %>
+
+            <br>
+
+            <span class="listing-price">
+              ₹<%= listing.price.toLocaleString("en-IN") %>/night
+            </span>
+
+
+            <i class="tax-info">
+              &nbsp;+18% GST
+            </i>
+
           </p>
 
-          <a href="/listings/<%= listing._id %>" class="btn btn-primary">
+
+          <a
+            href="/listings/<%= listing._id %>"
+            class="btn btn-primary"
+          >
             View
           </a>
+
         </div>
+
       </div>
 
     </div>
 
   <% } %>
+
 </div>
 
 
-  <script>
-    let taxSwitch = document.getElementById("switchCheckDefault");
-    taxSwitch.addEventListener("click",()=>{
-      let taxInfo = document.getElementsByClassName("tax-info");
-      for(info of taxInfo){
-        if(info.style.display != "inline"){
-          info.style.display = "inline"
+<!-- =====================================================
+     TAX TOGGLE SCRIPT
+===================================================== -->
+
+<script>
+
+  const taxSwitch =
+    document.getElementById("switchCheckDefault");
+
+
+  if (taxSwitch) {
+
+    taxSwitch.addEventListener("change", () => {
+
+      const taxInfo =
+        document.querySelectorAll(".tax-info");
+
+
+      taxInfo.forEach((info) => {
+
+        if (taxSwitch.checked) {
+
+          info.style.display = "inline";
+
         } else {
-          info.style.display = "none"
+
+          info.style.display = "none";
+
         }
-      }
-    })
-  </script>
+
+      });
+
+    });
+
+  }
+
+</script>

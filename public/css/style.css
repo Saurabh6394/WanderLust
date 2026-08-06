@@ -547,30 +547,7 @@ body {
   transition: margin-left 0.3s ease;
 }
 
-/* Mobile responsiveness for listings */
-@media (max-width: 576px) {
-  .card-img-top {
-    height: 10rem !important; /* Smaller image height on mobile */
-  }
 
-  .card {
-    width: 100% !important; /* Ensure full width */
-    margin-bottom: 1rem !important; /* Adjust spacing */
-  }
-
-  .card-body h5 {
-    font-size: 1.1rem !important; /* Smaller title */
-  }
-
-  .card-body p {
-    font-size: 0.9rem !important; /* Smaller description */
-  }
-
-  .btn {
-    font-size: 0.8rem !important; /* Smaller button text */
-    padding: 0.4rem 0.8rem !important; /* Smaller button padding */
-  }
-}
 
 /* Tablet responsiveness for listings */
 @media (min-width: 577px) and (max-width: 768px) {
@@ -702,4 +679,366 @@ body {
 }
 
 
+/* =========================================
+   MOBILE NAVBAR
+========================================= */
 
+.mobile-search-wrapper {
+    width: 100%;
+    padding: 8px 12px 12px;
+}
+
+.mobile-search {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mobile-search-input {
+    flex: 1;
+    min-width: 0;
+    height: 46px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    border: 1px solid #dddddd;
+    border-radius: 25px;
+
+    padding: 0 15px;
+
+    background-color: white;
+}
+
+.mobile-search-input i {
+    color: #555;
+    flex-shrink: 0;
+}
+
+.mobile-search-input input {
+    width: 100%;
+    min-width: 0;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    font-size: 15px;
+}
+
+.mobile-search button {
+    border: none;
+    border-radius: 25px;
+
+    background-color: #fe424d;
+    color: white;
+
+    padding: 11px 18px;
+
+    font-weight: 500;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================
+   MOBILE ONLY
+========================================= */
+
+@media (max-width: 575.98px) {
+
+    .navbar {
+        padding-top: 8px;
+    }
+
+    .navbar .container-fluid {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    /* Logo */
+    .navbar-brand {
+        margin-right: 12px;
+    }
+
+    .navbar-brand i {
+        font-size: 2rem;
+    }
+
+    /* Hamburger */
+    .navbar-toggler {
+        margin-left: auto;
+
+        padding: 6px 10px;
+
+        border: 1px solid #ddd;
+    }
+
+    /* Sidebar width */
+    .custom-sidebar {
+        width: 280px !important;
+        max-width: 85vw;
+    }
+
+    .custom-sidebar .nav-link {
+        padding: 12px 5px;
+        font-size: 16px;
+        color: #222;
+    }
+
+}
+
+
+/* =====================================================
+   FINAL MOBILE RESPONSIVE FIX
+   ONLY affects phones - desktop remains unchanged
+===================================================== */
+
+@media (max-width: 575.98px) {
+
+    /* ---------- NAVBAR ---------- */
+
+    .navbar {
+        height: auto !important;
+        min-height: 5rem;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .navbar .container-fluid {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .navbar-brand {
+        margin-right: 10px;
+    }
+
+    .navbar-brand i {
+        font-size: 2rem;
+    }
+
+    .navbar-toggler {
+        margin-left: auto;
+        padding: 5px 9px;
+    }
+
+
+    /* ---------- MOBILE SEARCH ---------- */
+
+    .mobile-search-wrapper {
+        width: 100%;
+        padding: 8px 10px 5px;
+    }
+
+    .mobile-search {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .mobile-search-input {
+        flex: 1;
+        min-width: 0;
+        height: 44px;
+
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        padding: 0 14px;
+
+        border: 1px solid #ddd;
+        border-radius: 25px;
+
+        background: white;
+    }
+
+    .mobile-search-input i {
+        flex-shrink: 0;
+        color: #717171;
+    }
+
+    .mobile-search-input input {
+        width: 100%;
+        min-width: 0;
+
+        border: none;
+        outline: none;
+
+        background: transparent;
+        font-size: 14px;
+    }
+
+    .mobile-search button {
+        flex-shrink: 0;
+
+        height: 44px;
+
+        padding: 0 15px;
+
+        border: none;
+        border-radius: 25px;
+
+        background: #fe424d;
+        color: white;
+
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+
+    /* ---------- FILTERS ---------- */
+
+    #filters {
+        width: 100%;
+
+        display: flex !important;
+        flex-wrap: nowrap !important;
+
+        justify-content: flex-start !important;
+
+        gap: 10px !important;
+
+        overflow-x: auto !important;
+        overflow-y: hidden;
+
+        padding: 8px 4px !important;
+
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+
+        scrollbar-width: none;
+    }
+
+    #filters::-webkit-scrollbar {
+        display: none;
+    }
+
+    .filter {
+        flex: 0 0 auto;
+
+        min-width: 75px !important;
+
+        margin-top: 8px !important;
+
+        text-align: center;
+    }
+
+    .filter i {
+        font-size: 1rem;
+    }
+
+    .filter p {
+        font-size: 0.78rem;
+
+        white-space: nowrap;
+
+        margin-bottom: 5px;
+    }
+
+    .tax-toggle {
+        flex: 0 0 auto;
+
+        font-size: 0.75rem;
+
+        padding: 7px 10px;
+    }
+
+
+    /* ---------- LISTING GRID ---------- */
+
+    .row {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    .row > .col-12 {
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+
+
+    /* ---------- LISTING CARD ---------- */
+
+    .listing-card {
+        width: 100% !important;
+        height: auto !important;
+
+        margin-bottom: 15px !important;
+    }
+
+
+    /* ---------- LISTING IMAGE ---------- */
+
+    .listing-image-container {
+        width: 100%;
+
+        aspect-ratio: 4 / 3;
+
+        overflow: hidden;
+
+        border-radius: 12px;
+
+        background-color: #f2f2f2;
+    }
+
+    .listing-image {
+        width: 100% !important;
+        height: 100% !important;
+
+        display: block;
+
+        object-fit: cover !important;
+    }
+
+
+    /* ---------- LISTING TEXT ---------- */
+
+    .listing-card .card-body {
+        padding: 10px 2px 4px !important;
+    }
+
+    .listing-card .card-title {
+        font-size: 1.05rem !important;
+
+        margin-bottom: 5px;
+    }
+
+    .listing-description {
+        font-size: 0.9rem !important;
+
+        line-height: 1.4;
+
+        margin-bottom: 10px;
+    }
+
+    .listing-price {
+        font-weight: 600;
+    }
+
+
+    /* ---------- VIEW BUTTON ---------- */
+
+    .listing-card .btn {
+        font-size: 0.85rem !important;
+
+        padding: 0.4rem 0.8rem !important;
+    }
+
+
+    /* ---------- MOBILE SIDEBAR ---------- */
+
+    .custom-sidebar {
+        width: 240px !important;
+        max-width: 80vw !important;
+    }
+}
